@@ -1,23 +1,17 @@
 apiVersion: apps/v1
-kind: StatefulSet
+kind: Deployment
 metadata:
-  name: app-b
+  name: pod-b
 spec:
-  serviceName: app-b-service
   replicas: 3
   selector:
     matchLabels:
-      app: app-b
+      app: pod-b
   template:
     metadata:
       labels:
-        app: app-b
+        app: pod-b
     spec:
-      containers:
-      - name: container-app-b
-        image: nginx
-        ports:
-        - containerPort: 80
       affinity:
         podAntiAffinity:
           requiredDuringSchedulingIgnoredDuringExecution:
@@ -26,5 +20,10 @@ spec:
               - key: app
                 operator: In
                 values:
-                - app-b
+                - pod-b
             topologyKey: kubernetes.io/hostname
+      containers:
+      - name: container-pod-b
+        image: nginx
+        ports:
+        - containerPort: 80            
