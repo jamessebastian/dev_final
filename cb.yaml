@@ -21,15 +21,15 @@ spec:
                 operator: In
                 values:
                 - app-b
-      podAntiAffinity:
-        requiredDuringSchedulingIgnoredDuringExecution:
-        - labelSelector:
-            matchExpressions:
-            - key: app
-              operator: In
-              values:
-              - app-b
-          topologyKey: "kubernetes.io/hostname"
+        podAntiAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+          - labelSelector:
+              matchExpressions:
+              - key: app
+                operator: In
+                values:
+                - app-b
+            topologyKey: "kubernetes.io/hostname"
       containers:
       - name: app-b
         image: nginx

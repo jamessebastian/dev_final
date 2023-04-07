@@ -11,6 +11,7 @@ spec:
     metadata:
       labels:
         app: pod-a
+        pod-type: pod-a
     spec:
       affinity:
         podAntiAffinity:
@@ -24,7 +25,7 @@ spec:
             topologyKey: "kubernetes.io/hostname"
         podAffinity:
           preferredDuringSchedulingIgnoredDuringExecution:
-          - weight: 60
+          - weight: 70
             podAffinityTerm:
               labelSelector:
                 matchExpressions:
