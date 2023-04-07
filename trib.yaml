@@ -1,17 +1,17 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: pod-a
+  name: pod-b
 spec:
   replicas: 3
   selector:
     matchLabels:
-      app: pod-a
+      app: pod-b
   template:
     metadata:
       labels:
-        app: pod-a
-        pod-type: pod-a
+        app: pod-b
+        pod-type: pod-b
     spec:
       affinity:
         podAntiAffinity:
@@ -21,7 +21,7 @@ spec:
               - key: app
                 operator: In
                 values:
-                - pod-a
+                - pod-b
             topologyKey: "kubernetes.io/hostname"
         podAffinity:
           preferredDuringSchedulingIgnoredDuringExecution:
@@ -32,7 +32,7 @@ spec:
                 - key: app
                   operator: In
                   values:
-                  - pod-a
+                  - pod-b
               topologyKey: "kubernetes.io/hostname"
       containers:
       - name: container-a-nginx
