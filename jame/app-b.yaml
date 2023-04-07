@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: app-b
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: app-b
+  template:
+    metadata:
+      labels:
+        app: app-b
+    spec:
+      nodeSelector:
+        <zone-label-key>: <zone-label-value>
+      affinity:
+        podAntiAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+          - labelSelector:
+              matchExpressions:
+              - key: app
+                operator: In
+                values:
+                - app-b
+            topologyKey: "kubernetes.io/hostname"
+      containers:
+      - name: app-b
+        image: <app-b-image>
+        ports:
+        - containerPort: 80
