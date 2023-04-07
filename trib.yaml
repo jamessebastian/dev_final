@@ -11,7 +11,7 @@ spec:
     metadata:
       labels:
         app: pod-a
-        pod-type: pod-b
+        pod-type: pod-a
     spec:
       affinity:
         podAntiAffinity:
